@@ -12,20 +12,19 @@
 ### 图片展示
 
 - 首页
-  ![Image text](https://niuzheng.net/usr/uploads/2022/07/index.jpg)
-  <img src="https://niuzheng.net/usr/uploads/2022/07/index.jpg" width="10px"/>
+  <img src="https://niuzheng.net/usr/uploads/2022/07/index.jpg" width="100px"/>
 
 - 分类/标签文章页
-  ![Image text](https://niuzheng.net/usr/uploads/2022/07/cate.jpg)
+    <img src="https://niuzheng.net/usr/uploads/2022/07/cate.jpg" width="100px"/>
 
 - 文章归档页
-  ![Image text](https://niuzheng.net/usr/uploads/2022/07/history.jpg)
+      <img src="https://niuzheng.net/usr/uploads/2022/07/history.jpg" width="100px"/>
 
 - 标签页
-  ![Image text](https://niuzheng.net/usr/uploads/2022/07/tag.jpg)
+        <img src="https://niuzheng.net/usr/uploads/2022/07/tag.jpg" width="100px"/>
 
 - 个人中心
-  ![Image text](https://niuzheng.net/usr/uploads/2022/07/me.jpg)
+    <img src="https://niuzheng.net/usr/uploads/2022/07/me.jpg" width="100px"/>
 
 ### 安装
 - 微信公共号平台配置
