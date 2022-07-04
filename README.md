@@ -13,7 +13,7 @@
 
 - 首页
 
-  <img src="https://niuzheng.net/usr/uploads/2022/07/index.jpg" width="150px"/>
+  <img src="https://niuzheng.net/usr/uploads/2022/07/index.jpg" width="150px"/> <img src="https://niuzheng.net/usr/uploads/2022/07/cate.jpg" width="150px"/>
   
 - 分类/标签文章页
 
