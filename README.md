@@ -11,25 +11,9 @@
 
 ### 图片展示
 
-- 首页
+- 首页、分类/标签文章页、文章归档页、标签页、个人中心
 
-  <img src="https://niuzheng.net/usr/uploads/2022/07/index.jpg" width="150px"/> <img src="https://niuzheng.net/usr/uploads/2022/07/cate.jpg" width="150px"/>
-  
-- 分类/标签文章页
-
-  <img src="https://niuzheng.net/usr/uploads/2022/07/cate.jpg" width="150px"/>
-  
-- 文章归档页
-
-  <img src="https://niuzheng.net/usr/uploads/2022/07/history.jpg" width="150px"/>
-  
-- 标签页
-
-  <img src="https://niuzheng.net/usr/uploads/2022/07/tag.jpg" width="150px"/>
-  
-- 个人中心
-
-  <img src="https://niuzheng.net/usr/uploads/2022/07/me.jpg" width="150px"/>
+<img src="https://niuzheng.net/usr/uploads/2022/07/index.jpg" width="150px"/> <img src="https://niuzheng.net/usr/uploads/2022/07/cate.jpg" width="150px"/><img src="https://niuzheng.net/usr/uploads/2022/07/cate.jpg" width="150px"/><img src="https://niuzheng.net/usr/uploads/2022/07/history.jpg" width="150px"/><img src="https://niuzheng.net/usr/uploads/2022/07/tag.jpg" width="150px"/><img src="https://niuzheng.net/usr/uploads/2022/07/me.jpg" width="150px"/>
 
 ### 安装
 - 微信公共号平台配置
