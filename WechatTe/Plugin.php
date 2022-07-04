@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * 微信小程序配置对接插件之WechatTe_Plugin接口类
+ *
+ * @package WechatTe
+ * @author  友儿
+ * @version 3.0.0
+ * @link https://niuzheng.net
+ */
+
+
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 /**

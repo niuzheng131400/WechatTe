@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * 微信小程序配置对接插件之WechatTe_Action接口类
+ *
+ * @package WechatTe
+ * @author  友儿
+ * @version 3.0.0
+ * @link https://niuzheng.net
+ */
+
 class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
 {
     protected static $plugin_config = null;
