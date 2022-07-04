@@ -1,0 +1,17 @@
+/* pages/tag/tag.wxss */
+.list{
+    margin-bottom: 35px;
+}
+
+.custom-class{
+    margin: 10px 5px;
+}
+.title-class{
+    font-size: 20px;
+}
+.loading{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+    z-index: 9999999;
+}

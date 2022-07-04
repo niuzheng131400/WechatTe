@@ -1,0 +1,10 @@
+<van-search
+  value="{{ item ? item : '' }}"
+  shape="round"
+  placeholder="请输入关键词搜索"
+  use-action-slot
+  bind:change="onChange"
+>
+<view slot="action" bind:tap="onClick">搜索</view>
+</van-search>
+<van-notify id="van-notify" />

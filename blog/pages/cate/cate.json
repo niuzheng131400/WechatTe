@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "van-tree-select": "@vant/weapp/tree-select/index",
+    "z-item":"/componets/z-item/z-item"
+  }
+}

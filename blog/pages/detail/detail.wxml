@@ -1,0 +1,16 @@
+<z-van-nav-bar item="{{item?item:null}}" />
+<scroll-view class="list" scroll-y="true" style="height: {{windowHeight}}px;" bindscrolltolower="_loadMore" enable-back-to-top="true">
+    <view class="con">
+        <view class="title">{{info.title}}</view>
+        <view class="info">
+            <view><van-icon name="underway-o" />{{info.created}}</view>
+            <view><van-icon name="eye-o" />{{info.views}}</view>
+            <view><van-icon name="like-o" color="red"/>{{info.likes}} </view>
+        </view>
+        <view class="container">
+            <towxml nodes="{{article}}"/>
+        </view>
+    </view>
+</scroll-view>
+<import src="../../template/foot.wxml" />
+<template is="foot" data="{{pq:info.footer}}"></template>

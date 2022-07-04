@@ -1,0 +1,11 @@
+<z-van-nav-bar item="{{item?item:null}}" />
+<z-van-search item="{{search?search:''}}" bind:searchd="_searchd" />
+<z-swiper swiper="{{swiper}}" />
+<van-divider hairline />
+<scroll-view class="list" scroll-y="true" style="height: {{windowHeight}}px;" bindscrolltolower="_loadMore" enable-back-to-top="true">
+    <block wx:for="{{list}}" wx:key="index">
+        <z-item info="{{item}}" titleclass="index-class" customclass="index-custom-class" />
+        <van-divider hairline />
+    </block>
+    <van-loading wx:if="{{loading}}" type="spinner" color="#1989fa" size="80px" custom-class="loading" />
+</scroll-view>

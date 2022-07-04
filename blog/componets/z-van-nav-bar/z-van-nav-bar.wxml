@@ -1,0 +1,9 @@
+<van-nav-bar
+  title="{{item.title ? item.title : ''}}"
+  left-text="{{!item.is_hide ? '返回' : ''}}"
+  left-arrow="{{!item.is_hide ? 'true' : ''}}"
+  bind:click-left="onClickLeft"
+  custom-class="custom-class"
+  title-class="title-class"
+  custom-style="custom-style"
+/>

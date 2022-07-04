@@ -1,0 +1,15 @@
+.swiper {
+    height: 250rpx;
+    width: 100%;
+    background-color:honeydew;
+}
+.swiper-item {
+    height: 100%;
+    width: 100%;
+}
+.slide-image {
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+
+}

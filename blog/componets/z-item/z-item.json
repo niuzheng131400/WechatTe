@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "van-card": "@vant/weapp/card/index"
+    }
+}

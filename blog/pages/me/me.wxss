@@ -1,0 +1,10 @@
+/* pages/me/me.wxss */
+.cover{
+    background-color: #f03d37;
+    padding: 50rpx;
+    text-align: center;
+    color: #fff;
+  }
+  .hang{
+      color: #27c24c;
+  }

@@ -1,0 +1,16 @@
+<z-van-nav-bar item="{{item?item:null}}" />
+<scroll-view class="list" scroll-y="true" style="height: {{windowHeight}}px;" bindscrolltolower="_loadMore" enable-back-to-top="true">
+<van-cell-group title="标签大全">
+    <block wx:for="{{list}}" wx:key="index">
+        <van-tag 
+        round 
+        type="{{item.type}}" 
+        size="large" 
+        custom-class="custom-class"      
+        bindtap="toDetail"
+        data-link="{{item.link}}">
+        {{item.text}}
+        </van-tag>
+    </block>
+</van-cell-group>
+</scroll-view>

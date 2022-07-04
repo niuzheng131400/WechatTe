@@ -1,0 +1,6 @@
+<z-van-nav-bar item="{{item?item:null}}" />
+<van-cell-group title="文章归档，目前共计{{total}}篇日志，继续努力。">
+    <scroll-view class="list" scroll-y="true" style="height: {{windowHeight}}px;" bindscrolltolower="_loadMore" enable-back-to-top="true">
+        <van-steps direction="vertical" steps="{{steps}}" bind:click-step="toDetail"/>
+    </scroll-view>
+</van-cell-group>

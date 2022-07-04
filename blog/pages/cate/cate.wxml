@@ -1,0 +1,15 @@
+<z-van-nav-bar item="{{item?item:null}}"/>
+<van-tree-select
+  height="{{windowHeight}}"
+  items="{{ items }}"
+  main-active-index="{{ mainActiveIndex }}"
+  bind:click-nav="onClickNav"
+>
+<scroll-view slot="content" class="list" scroll-y="true" style="height: {{windowHeight}}px;" bindscrolltolower="_loadMore" enable-back-to-top="true" scroll-top="{{top}}">
+    <block wx:for="{{list}}" wx:key="index">
+    <z-item  info="{{item}}" titleclass="cate-class" customclass="cate-custom-class"/>
+    <van-divider hairline />
+   </block>
+   <van-loading  wx:if="{{loading}}"   type="spinner" color="#1989fa" size="80px" custom-class="loading"/>
+</scroll-view>
+</van-tree-select>

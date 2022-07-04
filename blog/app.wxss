@@ -1,0 +1,10 @@
+.footerview {
+    padding-top: 30rpx;
+    padding-bottom: 130rpx;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 24rpx;
+    font-family: Microsoft YaHei;
+    color: #999999;
+  }

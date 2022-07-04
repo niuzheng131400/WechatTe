@@ -1,0 +1,48 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/tag/tag",
+        "pages/me/me",
+        "pages/detail/detail",
+        "pages/cate/cate",
+        "pages/history/history"
+    ],
+    "tabBar": {
+        "custom": true,
+        "list": [
+            {
+                "pagePath": "pages/index/index"
+            },
+            {
+                "pagePath": "pages/cate/cate"
+            },
+            {
+                "pagePath": "pages/history/history"
+            },
+            {
+                "pagePath": "pages/tag/tag"
+            },
+            {
+                "pagePath": "pages/me/me"
+            }
+        ]
+    },
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "Weixin",
+        "navigationBarTextStyle": "black",
+        "navigationStyle": "custom"
+    },
+    "sitemapLocation": "sitemap.json",
+    "usingComponents": {
+        "z-van-nav-bar":"/componets/z-van-nav-bar/z-van-nav-bar",
+        "van-divider": "@vant/weapp/divider/index",
+        "van-row": "@vant/weapp/row/index",
+        "van-col": "@vant/weapp/col/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "van-loading": "@vant/weapp/loading/index",
+        "van-tag": "@vant/weapp/tag/index"
+    },
+    "lazyCodeLoading": "requiredComponents"
+}

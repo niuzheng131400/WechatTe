@@ -1,0 +1,11 @@
+/* componets/z-van-nav-bar/van-nav-bar.wxss */
+.custom-class{
+    background-color: #24c44c;
+    position: sticky;
+    top:0;
+    z-index: 99;
+}
+.title-class{
+    font-size:small;
+    color: white;
+}

@@ -1,0 +1,24 @@
+.con{
+    height: 100vh;
+    width: 100%;
+    background-color: whitesmoke;
+}
+.title{
+    height: 80px;
+    font-size: 18px;
+    text-align: center;
+    line-height: 30px;
+    color:dimgray;
+    border-bottom: 1px dotted silver;
+    margin-bottom: 5px;
+}
+.info{
+    display: flex;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    font: 13px/25px "SimHei";
+    justify-content: space-around;
+    border-bottom: 1px dotted silver;
+    margin-bottom: 5px;
+}

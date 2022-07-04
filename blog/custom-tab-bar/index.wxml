@@ -1,0 +1,12 @@
+<van-tabbar 
+  active="{{ active }}" 
+  bind:change="onChange"
+  active-color="#F25050"
+  fixed="{{true}}"
+>
+  <van-tabbar-item icon="wap-home-o">首页</van-tabbar-item>
+  <van-tabbar-item icon="apps-o">分类</van-tabbar-item>
+  <van-tabbar-item icon="clock-o">归档</van-tabbar-item>
+  <van-tabbar-item icon="bookmark-o">标签</van-tabbar-item>
+  <van-tabbar-item icon="contact">个人中心</van-tabbar-item>
+</van-tabbar>

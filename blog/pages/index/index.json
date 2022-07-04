@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "z-van-search": "/componets/z-van-search/z-van-search",
+    "z-swiper":"/componets/z-swiper/z-swiper",
+    "z-item":"/componets/z-item/z-item"
+  }
+}

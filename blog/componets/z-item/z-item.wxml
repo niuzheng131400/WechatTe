@@ -1,0 +1,24 @@
+<van-card desc="{{info.text}}" 
+    title="{{info.title}}" 
+    thumb="{{  info.str_value ? info.str_value :imageURL }}" 
+    lazy-load="{{true}}" 
+    title-class="{{titleclass}}" 
+    desc-class="desc-class" 
+    custom-class="{{customclass}}" 
+    thumb-class="thumb-class"
+    bindtap="toDetail"
+    data-link="{{info.link}}"
+>
+  <view slot="footer">
+    <van-row gutter="20">
+      <van-col span="12">
+        <van-icon name="underway-o" size="15px" />
+        {{info.created}}
+      </van-col>
+      <van-col span="12">
+        <van-icon name="eye-o" size="15px" />{{info.views}}
+        <van-icon name="like-o" size="15px" />{{info.likes}}
+      </van-col>
+    </van-row>
+  </view>
+</van-card>

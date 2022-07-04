@@ -1,0 +1,32 @@
+<z-van-nav-bar item="{{item?item:null}}"/>
+<view class="cover">
+  <van-image
+  round
+  fit="cover"
+  width="180rpx"
+  height="180rpx"
+  src="{{info.avatarUrl}}"/>
+  <view wx:if="{{info.nickName}}">
+  {{info.nickName}}
+  </view>
+</view>
+<scroll-view scroll-y="true" style="height: {{windowHeight}}px;">
+<van-cell-group title="关于我" inset>
+  <van-cell title="{{info.me}}"/>
+</van-cell-group>
+<van-cell-group title="关于座右铭" inset >
+  <van-cell title="{{info.motto}}"/>
+</van-cell-group>
+<van-cell-group title="关于博客" inset>
+  <van-cell title="{{info.website}}" clickable="{{true}}" bind:click="copy"  data-type="1"/>
+</van-cell-group>
+<van-cell-group title="关于邮箱" inset>
+  <van-cell title="{{info.mail}}" clickable="{{true}}" bind:click="copy" data-type="0"/>
+</van-cell-group>
+<van-cell-group title="关于版权" inset>
+  <van-cell title="{{info.copyright}}"/>
+</van-cell-group>
+</scroll-view>
+<import src="../../template/foot.wxml" />
+<template is="foot" data="{{pq:info.footer}}"></template>
+

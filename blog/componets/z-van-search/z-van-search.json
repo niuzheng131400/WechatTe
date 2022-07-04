@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "van-search": "@vant/weapp/search/index",
+        "van-notify": "@vant/weapp/notify/index"
+    }
+}
