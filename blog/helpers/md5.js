@@ -14,7 +14,6 @@ function sortSplit(params) {
 module.exports = {
     GetSign: function (params) {
         params.ti = Date.parse(new Date());
-        params.ti = 1656312461000;
         let connects = sortSplit(params);
         params.sign = connects;
         return params;
