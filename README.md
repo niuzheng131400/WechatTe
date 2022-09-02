@@ -14,7 +14,7 @@
 
 - 首页、分类/标签文章页、文章归档页、标签页、个人中心
 
-<img src="./images/index.jpg" width="150px"/><img src="./images/cate.jpg" width="150px"/><img src="./images/cate.jpg" width="150px"/><img src="./images/history.jpg" width="150px"/><img src="./images/tag.jpg" width="150px"/><img src="./images/me.jpg" width="150px"/>
+<img src="./images/index.jpg" width="150px"/><img src="./images/cate.jpg" width="150px"/><img src="./images/cate1.jpg" width="150px"/><img src="./images/history.jpg" width="150px"/><img src="./images/tag.jpg" width="150px"/><img src="./images/me.jpg" width="150px"/>
 
 ### 安装
 - 微信公共号平台配置
