@@ -2,6 +2,7 @@
 
 ### 最近闲来有空，就自己开发了一套对接typecho框架的微信小程序------`WechatTe`
 - 小程序前端框架 [vant-weapp](https://vant-contrib.gitee.io/vant-weapp/#/home) 和 [微信官方组件](https://developers.weixin.qq.com/miniprogram/dev/component/)
+- [博客本文章地址](https://niuzheng.net/archives/2752/)
 - 本小程序美观、简洁、大方。
 - 后端数据缓存驱动提供了`Memcache`、`Redis`。
 - 请求数据加密。
@@ -13,7 +14,7 @@
 
 - 首页、分类/标签文章页、文章归档页、标签页、个人中心
 
-<img src="https://niuzheng.net/usr/uploads/2022/07/index.jpg" width="150px"/> <img src="https://niuzheng.net/usr/uploads/2022/07/cate.jpg" width="150px"/><img src="https://niuzheng.net/usr/uploads/2022/07/cate.jpg" width="150px"/><img src="https://niuzheng.net/usr/uploads/2022/07/history.jpg" width="150px"/><img src="https://niuzheng.net/usr/uploads/2022/07/tag.jpg" width="150px"/><img src="https://niuzheng.net/usr/uploads/2022/07/me.jpg" width="150px"/>
+<img src="./images/index.jpg" width="150px"/><img src="./images/cate.jpg" width="150px"/><img src="./images/cate.jpg" width="150px"/><img src="./images/history.jpg" width="150px"/><img src="./images/tag.jpg" width="150px"/><img src="./images/me.jpg" width="150px"/>
 
 ### 安装
 - 微信公共号平台配置
@@ -48,3 +49,6 @@
     - domain 为你接口的域名,该域名在上面必须`微信公共号平台配置在request合法域名配置里面`
     - app_secret 为WechatTe插件后台配置的`通信密钥`
 - 这样你就可以访问你的小程序了，上传到服务器等着审核就可以了  
+
+
+
