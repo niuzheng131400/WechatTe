@@ -28,7 +28,7 @@ class WechatTe_Plugin implements Typecho_Plugin_Interface
         Helper::addAction('json', 'WechatTe_Action');
         self::init();
     }
-    
+
     private static function init()
     {
         $db     = Typecho_Db::get();
