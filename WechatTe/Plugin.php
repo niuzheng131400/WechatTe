@@ -26,6 +26,19 @@ class WechatTe_Plugin implements Typecho_Plugin_Interface
     {
         Helper::addRoute('jsonp', '/wxapi/v1/g.c', 'WechatTe_Action');
         Helper::addAction('json', 'WechatTe_Action');
+        self::init();
+    }
+    
+    private static function init()
+    {
+        $db     = Typecho_Db::get();
+        $prefix = $db->getPrefix();
+        if (!array_key_exists('views', $db->fetchRow($db->select()->from('table.contents')))) {
+            $db->query('ALTER TABLE `' . $prefix . 'contents` ADD `views` INT(10) DEFAULT 0;');
+        }
+        if (!array_key_exists('likes', $db->fetchRow($db->select()->from('table.contents')))) {
+            $db->query('ALTER TABLE `' . $prefix . 'contents` ADD `likes` INT(10) DEFAULT 0;');
+        }
     }
 
     public static function deactivate()
