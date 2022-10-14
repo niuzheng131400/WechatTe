@@ -131,12 +131,12 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
     public function _cate($params)
     {
         $type = isset($params['type']) ? $params['type'] : 'category';
-		$hide_category = trim(self::$plugin_config->hide_category);
-		$hide_category_arr = explode(',', $hide_category);
+        $hide_category = trim(self::$plugin_config->hide_category);
+        $hide_category_arr = explode(',', $hide_category);
         $all = $this->db->fetchAll($this->db->select('table.metas.mid,table.metas.name')->from('table.metas')->where('table.metas.type=?', $type));
         $items = [];
         foreach ($all as $one) {
-			if(in_array($one['mid'], $hide_category_arr)) continue;
+            if (is_array($hide_category_arr) && in_array($one['mid'], $hide_category_arr)) continue;
             $items[] = [
                 'text' => $one['name'],
                 'id' => $one['mid'],
