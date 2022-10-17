@@ -109,14 +109,9 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
         $all = $this->db->fetchRow($this->db->select(array('COUNT(authorId)' => 'all'))->from('table.contents')->where('table.contents.status = ?', 'publish')->where('table.contents.type=?', 'post'));
 
         $allpage = ceil($all['all'] / 10);
-        $posts = $this->db->fetchAll($this->db->select('table.contents.cid,title,text,views,likes,str_value,created,table.relationships.mid')->from('table.contents')
-            ->join('table.fields', 'table.fields.cid = table.contents.cid', Typecho_Db::LEFT_JOIN)
-            ->join('table.relationships', 'table.contents.cid = table.relationships.cid', Typecho_Db::LEFT_JOIN)
-            ->where('table.fields.name = "thumbSmall"')->where('table.contents.type = ?', 'post')->where('status = ?', 'publish')->where('created < ?', time())->order('table.contents.created', Typecho_Db::SORT_DESC)->offset(($page - 1) * 10)->limit(10));
-        $hideRule = self::getHideRule();
+        $posts = $this->db->fetchAll($this->db->select('table.contents.cid,title,text,views,likes,str_value,created')->from('table.contents')->join('table.fields', 'table.fields.cid = table.contents.cid', Typecho_Db::LEFT_JOIN)->where('table.fields.name = "thumbSmall"')->where('table.contents.type = ?', 'post')->where('status = ?', 'publish')->where('created < ?', time())->order('table.contents.created', Typecho_Db::SORT_DESC)->offset(($page - 1) * 10)->limit(10));
         $results = [];
         foreach ($posts as $result) {
-            if (is_array($hideRule) && in_array($result['mid'], $hideRule)) continue;
             $result['created'] = date('Y-m-d', $result['created']);
             $result['text'] = mb_substr($result['text'], 15, 20, 'utf-8') . "...";
             $result['link'] = '/pages/detail/detail?cid=' . $result['cid'];
@@ -136,12 +131,12 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
     public function _cate($params)
     {
         $type = isset($params['type']) ? $params['type'] : 'category';
-
+        $hide_category = trim(self::$plugin_config->hide_category);
+        $hide_category_arr = explode(',', $hide_category);
         $all = $this->db->fetchAll($this->db->select('table.metas.mid,table.metas.name')->from('table.metas')->where('table.metas.type=?', $type));
         $items = [];
-        $hideRule = self::getHideRule();
         foreach ($all as $one) {
-            if (is_array($hideRule) && in_array($one['mid'], $hideRule)) continue;
+            if (is_array($hide_category_arr) && in_array($one['mid'], $hide_category_arr)) continue;
             $items[] = [
                 'text' => $one['name'],
                 'id' => $one['mid'],
@@ -155,7 +150,7 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
             ->join('table.relationships', 'table.contents.cid = table.relationships.cid', Typecho_Db::INNER_JOIN)
             ->where('table.contents.status = ?', 'publish')->where('table.contents.type=?', 'post');
 
-        $query = $this->db->select('distinct table.contents.cid,title,text,views,likes,str_value,created,table.relationships.mid')->from('table.contents')
+        $query = $this->db->select('distinct table.contents.cid,title,text,views,likes,str_value,created')->from('table.contents')
             ->join('table.relationships', 'table.contents.cid = table.relationships.cid', Typecho_Db::LEFT_JOIN)
             ->join('table.fields', 'table.fields.cid = table.contents.cid', Typecho_Db::LEFT_JOIN)
             ->where('table.fields.name = "thumbSmall"')
@@ -172,7 +167,6 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
         $cates = $this->db->fetchAll($query);
         $results = [];
         foreach ($cates as $result) {
-            if (is_array($hideRule) && in_array($result['mid'], $hideRule)) continue;
             $result['created'] = date('Y-m-d', $result['created']);
             $result['text'] = " ";
             $result['link'] = '/pages/detail/detail?cid=' . $result['cid'];
@@ -241,12 +235,6 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
             'me' => self::$plugin_config->about_me
 
         ];
-    }
-
-    protected static function getHideRule()
-    {
-        $hide_category = trim(self::$plugin_config->hide_category);
-        return explode(',', $hide_category);
     }
 
 
