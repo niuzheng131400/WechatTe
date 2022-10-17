@@ -109,7 +109,7 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
         $all = $this->db->fetchRow($this->db->select(array('COUNT(authorId)' => 'all'))->from('table.contents')->where('table.contents.status = ?', 'publish')->where('table.contents.type=?', 'post'));
 
         $allpage = ceil($all['all'] / 10);
-        $posts = $this->db->fetchAll($this->db->select('table.contents.cid,title,text,views,likes,str_value,created')->from('table.contents')
+        $posts = $this->db->fetchAll($this->db->select('table.contents.cid,title,text,views,likes,str_value,created,table.relationships.mid')->from('table.contents')
             ->join('table.fields', 'table.fields.cid = table.contents.cid', Typecho_Db::LEFT_JOIN)
             ->join('table.relationships', 'table.contents.cid = table.relationships.cid', Typecho_Db::LEFT_JOIN)
             ->where('table.fields.name = "thumbSmall"')->where('table.contents.type = ?', 'post')->where('status = ?', 'publish')->where('created < ?', time())->order('table.contents.created', Typecho_Db::SORT_DESC)->offset(($page - 1) * 10)->limit(10));
