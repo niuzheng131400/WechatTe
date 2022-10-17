@@ -150,7 +150,7 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
             ->join('table.relationships', 'table.contents.cid = table.relationships.cid', Typecho_Db::INNER_JOIN)
             ->where('table.contents.status = ?', 'publish')->where('table.contents.type=?', 'post');
 
-        $query = $this->db->select('distinct table.contents.cid,title,text,views,likes,str_value,created')->from('table.contents')
+        $query = $this->db->select('distinct table.contents.cid,title,text,views,likes,str_value,created,table.relationships.mid')->from('table.contents')
             ->join('table.relationships', 'table.contents.cid = table.relationships.cid', Typecho_Db::LEFT_JOIN)
             ->join('table.fields', 'table.fields.cid = table.contents.cid', Typecho_Db::LEFT_JOIN)
             ->where('table.fields.name = "thumbSmall"')
@@ -167,6 +167,7 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
         $cates = $this->db->fetchAll($query);
         $results = [];
         foreach ($cates as $result) {
+            if (is_array($hide_category_arr) && in_array($result['mid'], $hide_category_arr)) continue;
             $result['created'] = date('Y-m-d', $result['created']);
             $result['text'] = " ";
             $result['link'] = '/pages/detail/detail?cid=' . $result['cid'];
