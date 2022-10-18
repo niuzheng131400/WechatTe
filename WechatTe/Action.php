@@ -14,6 +14,7 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
     protected static $plugin_config = null;
     private $db;
     protected $response;
+    protected static $hide_rule;
 
     public function __construct($request, $response, $params = null)
     {
@@ -27,7 +28,7 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
         }
 
         self::get_config();
-
+        self::set_hide_rule();
         $params = $this->all();
         $this->response = $response;
         if (!$this->check_sign($params)) {
@@ -85,9 +86,21 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
         $all = $this->db->fetchRow($this->db->select(array('COUNT(authorId)' => 'all'))->from('table.contents')->where('table.contents.type=?', 'post')->where('table.contents.status = ?', 'publish')->where("table.contents.title like '%$keyword%'"));
 
         $allpage = ceil($all['all'] / 10);
-        $posts = $this->db->fetchAll($this->db->select('table.contents.cid,title,text,views,likes,str_value,created')->from('table.contents')->join('table.fields', 'table.fields.cid = table.contents.cid', Typecho_Db::LEFT_JOIN)->where("table.contents.title like '%$keyword%'")->where('table.fields.name = "thumbSmall"')->where('table.contents.type = ?', 'post')->where('status = ?', 'publish')->where('created < ?', time())->order('table.contents.created', Typecho_Db::SORT_DESC)->offset(($page - 1) * 10)->limit(10));
+        $posts = $this->db->fetchAll(
+            $this->db->select('table.contents.cid,title,text,views,likes,str_value,created,table.relationships.mid')->from('table.contents')
+                ->join('table.fields', 'table.fields.cid = table.contents.cid', Typecho_Db::LEFT_JOIN)
+                ->join('table.relationships', 'table.contents.cid = table.relationships.cid', Typecho_Db::LEFT_JOIN)
+                ->where("table.contents.title like '%$keyword%'")->where('table.fields.name = "thumbSmall"')
+                ->where('table.contents.type = ?', 'post')
+                ->where('status = ?', 'publish')
+                ->where('created < ?', time())
+                ->group('table.contents.cid')
+                ->order('table.contents.created', Typecho_Db::SORT_DESC)
+                ->offset(($page - 1) * 10)
+                ->limit(10));
         $results = [];
         foreach ($posts as $result) {
+            if(in_array($result['mid'] , self::$hide_rule)) continue;
             $result['created'] = date('Y-m-d', $result['created']);
             $result['text'] = mb_substr($result['text'], 15, 20, 'utf-8') . "...";
             $result['link'] = '/pages/detail/detail?cid=' . $result['cid'];
@@ -106,12 +119,30 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
     public function _list($params)
     {
         $page = isset($params['page']) && !empty($params['page']) ? $params['page'] : 1;
-        $all = $this->db->fetchRow($this->db->select(array('COUNT(authorId)' => 'all'))->from('table.contents')->where('table.contents.status = ?', 'publish')->where('table.contents.type=?', 'post'));
+        $all = $this->db->fetchRow(
+            $this->db->select(array('COUNT(authorId)' => 'all'))
+                ->from('table.contents')
+                ->where('table.contents.status = ?', 'publish')
+                ->where('table.contents.type=?', 'post')
+        );
 
         $allpage = ceil($all['all'] / 10);
-        $posts = $this->db->fetchAll($this->db->select('table.contents.cid,title,text,views,likes,str_value,created')->from('table.contents')->join('table.fields', 'table.fields.cid = table.contents.cid', Typecho_Db::LEFT_JOIN)->where('table.fields.name = "thumbSmall"')->where('table.contents.type = ?', 'post')->where('status = ?', 'publish')->where('created < ?', time())->order('table.contents.created', Typecho_Db::SORT_DESC)->offset(($page - 1) * 10)->limit(10));
+        $posts = $this->db->fetchAll(
+            $this->db->select('table.contents.cid,title,text,views,likes,str_value,created,table.relationships.mid')
+                ->from('table.contents')
+                ->join('table.fields', 'table.fields.cid = table.contents.cid', Typecho_Db::LEFT_JOIN)
+                ->join('table.relationships', 'table.contents.cid = table.relationships.cid', Typecho_Db::LEFT_JOIN)
+                ->where('table.fields.name = "thumbSmall"')
+                ->where('table.contents.type = ?', 'post')
+                ->where('status = ?', 'publish')
+                ->where('created < ?', time())
+                ->group('table.contents.cid')
+                ->order('table.contents.created', Typecho_Db::SORT_DESC)->offset(($page - 1) * 10)
+                ->limit(10)
+        );
         $results = [];
         foreach ($posts as $result) {
+            if(in_array($result['mid'] , self::$hide_rule)) continue;
             $result['created'] = date('Y-m-d', $result['created']);
             $result['text'] = mb_substr($result['text'], 15, 20, 'utf-8') . "...";
             $result['link'] = '/pages/detail/detail?cid=' . $result['cid'];
@@ -131,12 +162,10 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
     public function _cate($params)
     {
         $type = isset($params['type']) ? $params['type'] : 'category';
-        $hide_category = trim(self::$plugin_config->hide_category);
-        $hide_category_arr = explode(',', $hide_category);
         $all = $this->db->fetchAll($this->db->select('table.metas.mid,table.metas.name')->from('table.metas')->where('table.metas.type=?', $type));
         $items = [];
         foreach ($all as $one) {
-            if (is_array($hide_category_arr) && in_array($one['mid'], $hide_category_arr)) continue;
+            if($type =='category' && in_array($one['mid'] , self::$hide_rule)) continue;
             $items[] = [
                 'text' => $one['name'],
                 'id' => $one['mid'],
@@ -150,7 +179,7 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
             ->join('table.relationships', 'table.contents.cid = table.relationships.cid', Typecho_Db::INNER_JOIN)
             ->where('table.contents.status = ?', 'publish')->where('table.contents.type=?', 'post');
 
-        $query = $this->db->select('distinct table.contents.cid,title,text,views,likes,str_value,created')->from('table.contents')
+        $query = $this->db->select('distinct table.contents.cid,title,text,views,likes,str_value,created,table.relationships.mid')->from('table.contents')
             ->join('table.relationships', 'table.contents.cid = table.relationships.cid', Typecho_Db::LEFT_JOIN)
             ->join('table.fields', 'table.fields.cid = table.contents.cid', Typecho_Db::LEFT_JOIN)
             ->where('table.fields.name = "thumbSmall"')
@@ -160,13 +189,14 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
             $queryCount = $queryCount->where('table.relationships.mid = ?', $cate);
             $query = $query->where('table.relationships.mid = ?', $cate);
         }
-        $query = $query->where('table.contents.created < ?', time())->order('table.contents.created', Typecho_Db::SORT_DESC)->offset(($page - 1) * 10)->limit(10);
+        $query = $query->where('table.contents.created < ?', time())->group('table.contents.cid')->order('table.contents.created', Typecho_Db::SORT_DESC)->offset(($page - 1) * 10)->limit(10);
 
         $all = $this->db->fetchRow($queryCount);
         $allpage = ceil($all['all'] / 10);
         $cates = $this->db->fetchAll($query);
         $results = [];
         foreach ($cates as $result) {
+            if($type =='category' && in_array($result['mid'] , self::$hide_rule)) continue;
             $result['created'] = date('Y-m-d', $result['created']);
             $result['text'] = " ";
             $result['link'] = '/pages/detail/detail?cid=' . $result['cid'];
@@ -237,6 +267,16 @@ class WechatTe_Action extends Typecho_Widget implements Widget_Interface_Do
         ];
     }
 
+    protected static function set_hide_rule()
+    {
+        $hide_category_arr = [];
+        if(isset(self::$plugin_config->hide_category)) {
+            $hide_category = trim(self::$plugin_config->hide_category);
+            $hide_category_arr =  explode(',', $hide_category);
+        }
+        self::$hide_rule =  $hide_category_arr;
+        return true;
+    }
 
     protected function check_agent()
     {
