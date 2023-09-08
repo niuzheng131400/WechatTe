@@ -23,7 +23,7 @@ class CRedis implements ICache
     {
         $this->host = isset($option->host) && !empty($option->host) ? $option->host : $this->host;
         $this->port = isset($option->port) && !empty($option->port) ? $option->port : $this->port;
-        $this->auth = isset($option->auth) && !empty($option->auth) ? $option->host : $this->auth;
+        $this->auth = isset($option->auth) && !empty($option->auth) ? $option->auth : $this->auth;
         $this->expire = isset($option->expire) && !empty($option->expire) ? (int)$option->expire : (int)$this->expire;
 
         $this->init($option);
